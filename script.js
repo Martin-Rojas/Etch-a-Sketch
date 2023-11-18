@@ -1,19 +1,32 @@
 const grid = document.querySelector(".grid");
 const div = document.createElement("div");
+const userColorChoiceElement = document.querySelector("#color");
 
-/*Create a grid with dimensions user gave */
-for (let rows = 0; rows < 9; rows++) {
-  for (let colms = 0; colms < 9; colms++) {
-    const div = document.createElement("div");
-    div.style.width = `${grid.clientWidth/9}px`
-    div.style.height = `${grid.clientWidth/9}px`
-    div.classList.add("single-div");
-    
-    div.addEventListener('click', (e)=> {
-        div.style.backgroundColor = "red";
+let userColor = 'black';
 
-    })
-    grid.append(div);
-    
+userColorChoiceElement.addEventListener("change", (event) => {
+  userColor = event.target.value;
+  return userColor;
+});
+
+const defaultValue = 16;
+
+const createGrid = (sizeGrid) => {
+  /*Create a grid with dimensions user gave */
+  for (let rows = 0; rows < sizeGrid; rows++) {
+    for (let colms = 0; colms < sizeGrid; colms++) {
+      const div = document.createElement("div");
+      div.style.width = `${grid.clientWidth / sizeGrid}px`;
+      div.style.height = `${grid.clientWidth / sizeGrid}px`;
+      div.classList.add("single-div");
+
+      div.addEventListener("mouseover", (e) => {
+        div.style.backgroundColor = userColor;
+      });
+
+      grid.append(div);
+    }
   }
-}
+};
+
+createGrid(defaultValue);

@@ -12,6 +12,7 @@
 }
 
 .grid {
+  border: 2px solid red;
   width: 600px;
   height: 600px;
   display: flex;
