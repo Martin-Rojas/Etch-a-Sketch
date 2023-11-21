@@ -11,6 +11,13 @@
   align-items: center;
 }
 
+.controls{
+    display: flex;
+    justify-content: space-around;
+    width: 600px;
+    margin: 20px;
+  }
+
 .grid {
   border: 2px solid red;
   width: 600px;

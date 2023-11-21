@@ -10,18 +10,15 @@
     <div class="container">
       <h1>Etch-a-Sketch</h1>
       <div class="controls">
-        <button>Reset</button>
+        <button id="reset">Reset</button>
         <button>Black</button>
         <button>RGB</button>
 
-        <label for="favcolor">Select color:</label>
+        <label for="color">Select color:</label>
         <input type="color" id="color" name="color" value="#ff0000" />
 
-        <form action="#" method="get">
-          <label for="vol">Grid:</label>
-          <input type="range" id="vol" name="vol" min="2" max="100" />
-          <input type="submit" value="Submit" />
-        </form>
+        <label for="grid-size">Grid-size:</label>
+        <input type="range" id="grid-size" name="grid-size" min="2" max="30" />
       </div>
       <div class="grid"></div>
     </div>
