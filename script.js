@@ -3,6 +3,7 @@ const div = document.createElement("div");
 const userColorChoiceElement = document.querySelector("#color");
 const gridSizeInput = document.getElementById("grid-size");
 const resetBntElement = document.getElementById("reset");
+const btnBlackElement = document.getElementById("black");
 
 let userColor = "black";
 const defaultValue = 16;
@@ -13,6 +14,12 @@ resetBntElement.addEventListener("click", () => {
   allDivs.forEach((div) => {
     div.style.backgroundColor = `white`;
   });
+});
+
+/* btn will change userColor to black*/
+btnBlackElement.addEventListener("click", () => {
+  userColor = `black`;
+  return userColor;
 });
 
 /* User change a color for background-color*/
@@ -37,7 +44,7 @@ gridSizeInput.addEventListener("change", (e) => {
       div.style.width = `${grid.clientWidth / userSizeGrid}px`;
       div.style.height = `${grid.clientWidth / userSizeGrid}px`;
       div.classList.add("single-div");
-      div.classList.add("cells");
+
       div.addEventListener("mouseover", (e) => {
         div.style.backgroundColor = userColor;
       });
@@ -55,7 +62,7 @@ const createGrid = (sizeGrid) => {
       div.style.width = `${grid.clientWidth / sizeGrid}px`;
       div.style.height = `${grid.clientWidth / sizeGrid}px`;
       div.classList.add("single-div");
-      div.classList.add("cells");
+
       div.addEventListener("mouseover", (e) => {
         div.style.backgroundColor = userColor;
       });
