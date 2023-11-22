@@ -33,68 +33,47 @@ const getRandomColor = () => {
   return `#${randomColor}`;
 };
 
-btnRGBElement.addEventListener("click", () => {
+const typeOfBackgroundColor = (id) => {
   let val = document.getElementById("grid-size").value;
   let cell = grid.children;
   for (let i = 0; i < val * val; i++) {
     cell[i].addEventListener("mouseover", function (event) {
-      event.target.style.backgroundColor = getRandomColor();
+      if (id === "rgb") {
+        event.target.style.backgroundColor = getRandomColor();
+      } else if (id === "black") {
+        event.target.style.backgroundColor = `black`;
+      } else {
+        event.target.style.backgroundColor = userColorChoiceElement.value;
+      }
     });
   }
+};
+
+btnRGBElement.addEventListener("click", (event) => {
+  typeOfBackgroundColor(event.target.id);
 });
 
 /* reset background color to it original color*/
 resetBntElement.addEventListener("click", () => {
-    //delete grid
+  //delete grid
   let allDivs = document.querySelectorAll(".single-div");
   allDivs.forEach((div) => {
     div.remove();
   });
 
-  let userSizeGrid = 16;
-
-  /*Create a grid with dimensions user gave */
-  for (let rows = 0; rows < userSizeGrid; rows++) {
-    for (let colms = 0; colms < userSizeGrid; colms++) {
-      const div = document.createElement("div");
-      div.style.width = `${grid.clientWidth / userSizeGrid}px`;
-      div.style.height = `${grid.clientWidth / userSizeGrid}px`;
-      div.classList.add("single-div");
-      div.addEventListener("mouseover", (e) => {
-        div.style.backgroundColor = userColor;
-      });
-
-      grid.append(div);
-    }
-  }
-    
-  //   let allDivs = document.querySelectorAll(".single-div");
-  //   allDivs.forEach((div) => {
-  //     div.style.backgroundColor = `white`;
-  //   });
+  let resetGridSize = 16;
+  createGrid(resetGridSize);
 });
 
 /* btn will change userColor to black*/
-btnBlackElement.addEventListener("click", () => {
-  let val = document.getElementById("grid-size").value;
-  let cell = grid.children;
-  for (let i = 0; i < val * val; i++) {
-    cell[i].addEventListener("mouseover", function (event) {
-      event.target.style.backgroundColor = `black`;
-    });
-  }
+btnBlackElement.addEventListener("click", (event) => {
+  typeOfBackgroundColor(event.target.id);
 });
 
 /* User change a color for background-color*/
 userColorChoiceElement.addEventListener("change", (event) => {
-  userColor = event.target.value;
-  let val = document.getElementById("grid-size").value;
-  let cell = grid.children;
-  for (let i = 0; i < val * val; i++) {
-    cell[i].addEventListener("mouseover", function (event) {
-      event.target.style.backgroundColor = userColor;
-    });
-  }
+  console.log(userColorChoiceElement.value);
+  typeOfBackgroundColor(event.target.id);
 });
 
 /* User chose the size of a grid*/
@@ -106,21 +85,7 @@ gridSizeInput.addEventListener("change", (e) => {
   });
 
   let userSizeGrid = e.target.value;
-
-  /*Create a grid with dimensions user gave */
-  for (let rows = 0; rows < userSizeGrid; rows++) {
-    for (let colms = 0; colms < userSizeGrid; colms++) {
-      const div = document.createElement("div");
-      div.style.width = `${grid.clientWidth / userSizeGrid}px`;
-      div.style.height = `${grid.clientWidth / userSizeGrid}px`;
-      div.classList.add("single-div");
-      div.addEventListener("mouseover", (e) => {
-        div.style.backgroundColor = userColor;
-      });
-
-      grid.append(div);
-    }
-  }
+  createGrid(userSizeGrid);
 });
 
 createGrid(defaultValue);
