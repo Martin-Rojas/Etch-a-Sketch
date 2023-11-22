@@ -9,6 +9,24 @@ const btnRGBElement = document.getElementById("rgb");
 let userColor = "black";
 const defaultValue = 16;
 
+const createGrid = (sizeGrid) => {
+  /*Create a grid with dimensions user gave */
+  for (let rows = 0; rows < sizeGrid; rows++) {
+    for (let colms = 0; colms < sizeGrid; colms++) {
+      const div = document.createElement("div");
+      div.style.width = `${grid.clientWidth / sizeGrid}px`;
+      div.style.height = `${grid.clientWidth / sizeGrid}px`;
+      div.classList.add("single-div");
+
+      div.addEventListener("mouseover", () => {
+        div.style.backgroundColor = userColor;
+      });
+
+      grid.append(div);
+    }
+  }
+};
+
 // Get random color
 const getRandomColor = () => {
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -27,10 +45,33 @@ btnRGBElement.addEventListener("click", () => {
 
 /* reset background color to it original color*/
 resetBntElement.addEventListener("click", () => {
+    //delete grid
   let allDivs = document.querySelectorAll(".single-div");
   allDivs.forEach((div) => {
-    div.style.backgroundColor = `white`;
+    div.remove();
   });
+
+  let userSizeGrid = 16;
+
+  /*Create a grid with dimensions user gave */
+  for (let rows = 0; rows < userSizeGrid; rows++) {
+    for (let colms = 0; colms < userSizeGrid; colms++) {
+      const div = document.createElement("div");
+      div.style.width = `${grid.clientWidth / userSizeGrid}px`;
+      div.style.height = `${grid.clientWidth / userSizeGrid}px`;
+      div.classList.add("single-div");
+      div.addEventListener("mouseover", (e) => {
+        div.style.backgroundColor = userColor;
+      });
+
+      grid.append(div);
+    }
+  }
+    
+  //   let allDivs = document.querySelectorAll(".single-div");
+  //   allDivs.forEach((div) => {
+  //     div.style.backgroundColor = `white`;
+  //   });
 });
 
 /* btn will change userColor to black*/
@@ -81,23 +122,5 @@ gridSizeInput.addEventListener("change", (e) => {
     }
   }
 });
-
-const createGrid = (sizeGrid) => {
-  /*Create a grid with dimensions user gave */
-  for (let rows = 0; rows < sizeGrid; rows++) {
-    for (let colms = 0; colms < sizeGrid; colms++) {
-      const div = document.createElement("div");
-      div.style.width = `${grid.clientWidth / sizeGrid}px`;
-      div.style.height = `${grid.clientWidth / sizeGrid}px`;
-      div.classList.add("single-div");
-
-      div.addEventListener("mouseover", () => {
-        div.style.backgroundColor = userColor;
-      });
-
-      grid.append(div);
-    }
-  }
-};
 
 createGrid(defaultValue);
